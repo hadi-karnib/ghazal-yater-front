@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* src/styles/portfolio.css */
+
+/* make hosts relative */
+.portfolioDetailsPage {
+  position: relative;
+}
+.portfolioDetailsPage #wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* sprite sheet size (same for all four) */
+:root {
+  --sprite: url("../public/icons.png");
+  --sprite-w: 864px;
+  --sprite-h: 768px;
+}
+
+/* 2) BOTTOM-RIGHT (already had) */
+.portfolioDetailsPage #wrapper::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 301px;
+  height: 236px; /* bottom:0 to sit flush */
+  background: var(--sprite) -10px -412px no-repeat;
+  z-index: 1;
+}
+
+/* 3) TOP-RIGHT (new, on parent) */
+.portfolioDetailsPage::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 220px;
+  height: 107px;
+  background: var(--sprite) -324px -361px no-repeat; /* TR blob from sprite */
+  z-index: 2;
+}
+
+/* 4) BOTTOM-LEFT (new, on parent) */
+.portfolioDetailsPage::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 265px;
+  height: 231px;
+  background: var(--sprite) -325px -476px no-repeat; /* BL blob from sprite */
+  z-index: 0;
+}
+
+.portfolioDetailsPage #wrapper::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 86px;
+  width: 77px;
+  height: 403px;
+  background: url("/public/icons.png") -769px -9px no-repeat;
+}
+
+/* optional: hide corners on small screens */
+@media (max-width: 1200px) {
+  .portfolioDetailsPage::before,
+  .portfolioDetailsPage::after {
+    display: none;
+  }
+}
